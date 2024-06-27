@@ -1,0 +1,9 @@
+.container {
+  margin-top: 20px;
+
+}
+
+mat-form-field {
+  width: 40%;
+  background-color: white !important;
+}

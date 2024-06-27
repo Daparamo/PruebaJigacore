@@ -1,0 +1,65 @@
+<div class="title">
+  <h1>{{operacion}} Usuario</h1>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<section class="container">
+  <mat-card>
+    <mat-card-subtitle>
+      Datos de la Persona
+    </mat-card-subtitle>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="addEditPerson()">
+        <mat-grid-list cols="2" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Apellido</mat-label>
+              <input formControlName="surname" matInput>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Correo</mat-label>
+              <input formControlName="email" matInput>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field color="primary">
+              <mat-label>Fecha Nacimiento</mat-label>
+              <input matInput [matDatepicker]="dp" formControlName="birthDate" color="primary">
+              <mat-hint>DD, MM, YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Género</mat-label>
+              <select formControlName="gender" matNativeControl required>
+                <option *ngFor="let gender of genders;let i = index" [value]="i">{{gender}}</option>
+              </select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Foto</mat-label>
+              <input formControlName="img" matInput>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Guardar y
+              Volver</button>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2">
+            <button routerLink="/listPerson" routerLinkActive="router-link-active" mat-raised-button>Cancelar</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

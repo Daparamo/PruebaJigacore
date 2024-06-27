@@ -1,0 +1,27 @@
+<div class="title">
+  <h1>Ver Usuario</h1>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<section *ngIf="persona != null" class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <!-- <mat-card-title>{{persona.name}} {{persona.surname}}</mat-card-title> -->
+    </mat-card-header>
+    <img mat-card-image src="{{persona.img}}" alt="Photo of {{persona.name}}">
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item><strong>Nombre: </strong>{{persona.name}} {{persona.surname}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><strong>Correo: </strong>{{persona.email}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><strong>Fecha Nacimiento: </strong>{{persona.birthDate.toString().split("T")[0]}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item><strong>Género: </strong>{{genders[persona.gender]}}</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button routerLink="/editPerson/{{persona.id}}" mat-button color="primary">Editar</button>
+      <button routerLink="/listPerson" mat-button>Volver</button>
+    </mat-card-actions>
+  </mat-card>
+</section>

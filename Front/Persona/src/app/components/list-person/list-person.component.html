@@ -1,0 +1,59 @@
+<div class="title">
+  <h1>Usuario Consulta</h1>
+</div>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<section class="container">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input autocomplete="off">
+  </mat-form-field>
+
+  <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z3" matSort>
+    <ng-container matColumnDef="photo">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <img src={{element.img}} alt="">
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="surname">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.surname}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="phone">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Fecha Nacimiento </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{element.birthDate.split("T")[0]}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="address">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Género </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element"> {{genders[element.gender]}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>
+        <button routerLink="/addPerson" class="btn-agregar" mat-raised-button>Add</button>
+      </mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let element">
+        <div>
+          <mat-icon routerLink="/showPerson/{{ element.id }}" class="search-icon" fontIcon="search"
+            matTooltip="Ver más"></mat-icon>
+          <mat-icon routerLink="/editPerson/{{element.id}}" class="edit-icon" fontIcon="edit"
+            matTooltip="Editar"></mat-icon>
+          <mat-icon (click)="eliminarPersona(element.id)" class="delete-icon" fontIcon="delete"
+            matTooltip="Eliminar"></mat-icon>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
+</section>
